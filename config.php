@@ -1,18 +1,18 @@
+
 <?php
-/*
-This file contains database configuration assuming you are running MySQL using user "root" and password ""
-*/
+// Database connection using environment variables
+$servername = getenv('DB_HOST');  // Fetch DB Host from environment variables
+$username = getenv('DB_USER');    // Fetch DB User from environment variables
+$password = getenv('DB_PASSWORD'); // Fetch DB Password from environment variables
+$dbname = getenv('DB_NAME');      // Fetch DB Name from environment variables
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'login');
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Try connecting to the Database
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-// Check the connection
-if (!$conn) {
-    die("Error: Cannot connect to the database. " . mysqli_connect_error());
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+echo "Connected successfully";
 ?>
+
